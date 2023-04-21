@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="{{url_for('static',filename='style.css')}}"
+		/>
+		<title>Loan Prediction</title>
+	</head>
+	<body>
+		<div class="navbar">
+			<img
+				class="logo"
+				src="{{url_for('static',filename='workflow-mark-indigo-600.svg')}}"
+				alt="logo"
+			/>
+			<h2 class="heading">Loan Eligibility</h2>
+			<a href="#footer" class="contact">contact</a>
+		</div>
+		<div class="container">
+			<div class="bg-image"></div>
+			<div class="inner-container">
+				<h1 class="loan-h1">Loan Status Prediction</h1>
+				<h1 class="machine-h1">Machine Learning</h1>
+				<p>
+					The idea behind this project is to build an ML model and web
+					application that the bank can use to classify if a user can
+					be granted a loan or not.
+				</p>
+				<a class="btn" href="./predict">Predict</a>
+			</div>
+		</div>
+		<footer id="footer">
+			<p>© Copyright 2023</p>
+		</footer>
+	</body>
+</html>
