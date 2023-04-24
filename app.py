@@ -19,7 +19,7 @@ def predict():
         dependents = request.form['dependents']
         education = request.form['education']
         employed = request.form['employed']
-        credit = float(request.form['credit'])
+        credit = int(request.form['credit'])
         area = request.form['area']
         ApplicantIncome = float(request.form['ApplicantIncome'])
         CoapplicantIncome = float(request.form['CoapplicantIncome'])
