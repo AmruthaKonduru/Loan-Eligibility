@@ -4,11 +4,12 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Loan Status Prediction</title>
+		<title>Loan Prediction</title>
 		<link
 			rel="stylesheet"
 			href="{{url_for('static',filename='style.css')}}"
 		/>
+		<script defer src="{{url_for('static',filename='script.js')}}"></script>
 	</head>
 	<body>
 		<div class="prediction-navbar">
@@ -19,7 +20,13 @@
 			<a class="back-btn" href="./" role="button">Back</a>
 		</button>
 		<div class="form-container">
-			<form action="/predict" method="POST">
+			<form
+				class="loan-form"
+				id="loan-form"
+				action="/predict"
+				method="POST"
+				onsubmit="return checkForm(this);"
+			>
 				<div class="row">
 					<div class="col-25">
 						<label for="exampleFormControlInput1" class="form-label"
@@ -239,12 +246,18 @@
 				</div>
 
 				<div class="row btn--row">
-					<button class="btn-submit" type="submit">Predict</button>
+					<input
+						class="btn-submit"
+						type="submit"
+						name="myButton"
+						value="Predict"
+						onclick="return resetForm(this);"
+					/>
 				</div>
 			</form>
 
 			<div class="results">
-				<p>{{prediction_text}}</p>
+				<p class="output">{{prediction_text}}</p>
 			</div>
 		</div>
 	</body>
