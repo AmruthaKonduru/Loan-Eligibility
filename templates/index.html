@@ -4,37 +4,261 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Loan Prediction</title>
 		<link
 			rel="stylesheet"
 			href="{{url_for('static',filename='style.css')}}"
 		/>
-		<title>Loan Status Prediction</title>
+		<script defer src="{{url_for('static',filename='script.js')}}"></script>
 	</head>
 	<body>
-		<div class="navbar">
-			<img
-				class="logo"
-				src="{{url_for('static',filename='workflow-mark-indigo-600.svg')}}"
-				alt="logo"
-			/>
-			<h2 class="heading">Loan Eligibility</h2>
-			<a href="#footer" class="contact">contact</a>
+		<div class="prediction-navbar">
+			<h1>Loan Status Prediction</h1>
+			<p>Fill the form for prediction</p>
 		</div>
-		<div class="container">
-			<div class="bg-image"></div>
-			<div class="inner-container">
-				<h1 class="loan-h1">Loan Status Prediction</h1>
-				<h1 class="machine-h1">Machine Learning</h1>
-				<p>
-					The idea behind this project is to build an ML model and web
-					application that the bank can use to classify if a user can
-					be granted a loan or not.
-				</p>
-				<a class="btn" href="./predict">Predict</a>
+		<button class="back-btn-row">
+			<a class="back-btn" href="./" role="button">Back</a>
+		</button>
+		<div class="form-container">
+			<form
+				class="loan-form"
+				id="loan-form"
+				action="/predict"
+				method="POST"
+				onsubmit="return checkForm(this);"
+			>
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Gender</label
+						>
+					</div>
+					<div class="col-75">
+						<select
+							class="form-select"
+							id="gender"
+							name="gender"
+							aria-label="Default select example"
+						>
+							<option selected>-- select gender --</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label
+							for="exampleFormControlInput1"
+							class="form-label"
+						>
+							Married status</label
+						>
+					</div>
+					<div class="col-75">
+						<select
+							class="form-select"
+							id="married"
+							name="married"
+							aria-label="Default select example"
+						>
+							<option selected>
+								-- select married status --
+							</option>
+							<option value="Yes">Yes</option>
+							<option value="No">No</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Dependents</label
+						>
+					</div>
+					<div class="col-75">
+						<select
+							class="form-select"
+							id="dependents"
+							name="dependents"
+							aria-label="Default select example"
+						>
+							<option selected>-- select dependents --</option>
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3+">3+</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Education</label
+						>
+					</div>
+					<div class="col-75">
+						<select
+							class="form-select"
+							id="education"
+							name="education"
+							aria-label="Default select example"
+						>
+							<option selected>-- select education --</option>
+							<option value="Graduate">Graduate</option>
+							<option value="Not Graduate">Not Graduate</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Self Employed</label
+						>
+					</div>
+					<div class="col-75">
+						<select
+							class="form-select"
+							id="employed"
+							name="employed"
+							aria-label="Default select example"
+						>
+							<option selected>-- select Self_Employed --</option>
+							<option value="Yes">Yes</option>
+							<option value="No">No</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Credit History</label
+						>
+					</div>
+					<div class="col-75">
+						<select
+							class="form-select"
+							id="credit"
+							name="credit"
+							aria-label="Default select example"
+						>
+							<option selected>
+								-- select Credit_History --
+							</option>
+							<option value="1">1 --Debt paid</option>
+							<option value="0">0 --not paid</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Property Area</label
+						>
+					</div>
+					<div class="col-75">
+						<select
+							class="form-select"
+							id="area"
+							name="area"
+							aria-label="Default select example"
+						>
+							<option selected>-- select Property_Area --</option>
+							<option value="Semiurban">Semiurban</option>
+							<option value="Urban">Urban</option>
+							<option value="Rural">Rural</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Applicant Income</label
+						>
+					</div>
+					<div class="col-75">
+						<input
+							type="text"
+							class="form-control"
+							id="ApplicantIncome"
+							name="ApplicantIncome"
+							placeholder="ApplicantIncome"
+						/>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Coapplicant Income</label
+						>
+					</div>
+					<div class="col-75">
+						<input
+							type="text"
+							class="form-control"
+							id="CoapplicantIncome"
+							name="CoapplicantIncome"
+							placeholder="CoapplicantIncome"
+						/>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Loan Amount</label
+						>
+					</div>
+					<div class="col-75">
+						<input
+							type="text"
+							class="form-control"
+							id="LoanAmount"
+							name="LoanAmount"
+							placeholder="LoanAmount"
+						/>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-25">
+						<label for="exampleFormControlInput1" class="form-label"
+							>Loan Amount Term</label
+						>
+					</div>
+					<div class="col-75">
+						<input
+							type="text"
+							class="form-control"
+							id="Loan_Amount_Term"
+							name="Loan_Amount_Term"
+							placeholder="Loan_Amount_Term"
+						/>
+					</div>
+				</div>
+
+				<div class="row btn--row">
+					<input
+						class="btn-submit"
+						type="submit"
+						name="myButton"
+						value="Predict"
+						onclick="return resetForm(this);"
+					/>
+				</div>
+			</form>
+
+			<div class="results">
+				<p class="output">{{prediction_text}}</p>
 			</div>
 		</div>
-		<footer id="footer">
-			<p>© Copyright 2023</p>
-		</footer>
 	</body>
 </html>
